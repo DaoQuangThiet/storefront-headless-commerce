@@ -15,6 +15,7 @@ import Link from 'next/link'
 
 const DealsOfDay = (props) => {
   const { productsdeal } = props
+  console.log(productsdeal)
   return (
     <Container
       pt="10"
@@ -80,10 +81,22 @@ const DealsOfDay = (props) => {
                       m="0px 20px 0px 0px"
                       textDecoration="line-through"
                     >
-                      ${item.variants[0].price / 100}
+                      ${item.variantList.items[0].price / 100}
+                    </Text>
+                    <Text style={{ color: 'rgb(64,198,255)', margin: 0 }}>
+                      {' '}
+                      ${item.variantList.items[0].priceWithTax / 100}
                     </Text>
                   </Box>
                   <Box
+                    sx={{
+                      width: '320px',
+                      overflow: 'hidden',
+                      textOverfloww: 'ellipsis',
+                      lineHeight: '25px',
+                      height: '75px',
+                      display: '-webkit-box',
+                    }}
                     color="brand.detail"
                     m="18px 8px 27px 0px"
                     dangerouslySetInnerHTML={{
@@ -92,7 +105,7 @@ const DealsOfDay = (props) => {
                   />
                   <CountDown />
                   <Box>
-                    <Link href={`/product/${item.slug}`}>
+                    <Link passHref={true} href={`/product/${item.slug}`}>
                       <Button
                         fontSize="14px"
                         fontWeight="600"
